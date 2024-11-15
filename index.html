@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Minha Namorada</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <button>Eu</button>
+        <button>te</button>
+        <button>amo</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <p>
+        Meu amor, você é a razão do meu sorriso, a fonte da minha felicidade e a
+        pessoa que faz meu mundo brilhar de uma maneira que eu nunca imaginei
+        ser possível. Todos os dias ao seu lado são uma bênção e cada momento
+        contigo é uma eternidade que eu quero viver. Eu te amo profundamente,
+        mais do que palavras podem expressar, mais do que o infinito pode
+        conter. Você é minha vida, meu coração, minha alma. Para sempre, te
+        amarei.
+      </p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="questions">
+      <p><strong>Responda as perguntas abaixo:</strong></p>
+      <form id="questionForm">
+        <label for="q1">1. Eu te faço feliz?</label>
+        <select id="q1" name="q1">
+          <option value="não">Não</option>
+          <option value="sim">Sim</option>
+        </select>
+        <br /><br />
+
+        <label for="q2">2. Eu sou quem você esperava para a sua vida?</label>
+        <select id="q2" name="q2">
+          <option value="não">Não</option>
+          <option value="sim">Sim</option>
+        </select>
+        <br /><br />
+
+        <label for="q3"
+          >3. Você quer passar o resto da sua vida ao meu lado?</label
+        >
+        <select id="q3" name="q3">
+          <option value="não">Não</option>
+          <option value="sim">Sim</option>
+        </select>
+        <br /><br />
+
+        <button type="submit">Responder</button>
+      </form>
+
+      <div id="resultMessage" class="resultMessage"></div>
+      <div id="calmMessage" class="calmMessage" style="display: none">
+        Calma... Tem mais coisa
+      </div>
+    </div>
+
+    <div id="counter" class="counter" style="display: none">
+      <p>
+        <strong>Nosso Relacionamento: <span id="counterTime">0</span> </strong>
+      </p>
+    </div>
+
+    <div id="relationshipIcon" class="relationshipIcon">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Heart_emoji.png"
+        alt="Ícone Relacionamento"
+        width="100"
+      />
+    </div>
+
+    <!-- Player de música e mensagem de espera lado a lado -->
+    <div class="music-container" id="musicPlayer" style="display: none">
+      <div class="music-player">
+        <p><strong>Férias de Julho - Cristiano Araújo</strong></p>
+        <iframe
+          id="musicIframe"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/uz-SNYXzmYU?enablejsapi=1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <!-- Mensagem de espera ao lado -->
+      <div id="waitingMessage" class="waitingMessage" style="display: none">
+        Escuta a música até o final para continuar essa surpresa heheheheh
+      </div>
+    </div>
+
+    <hr class="divider" id="divider" style="display: none" />
+
+    <div id="typedText" class="typing-container" style="display: none">
+      <div class="typing"></div>
+    </div>
+
+    <!-- Nova seção com a imagem e o texto que vai aparecer após a digitação -->
+    <div id="finalMessage" class="finalMessage" style="display: none">
+      <img
+        src="./img/coração.webp"
+        alt="Imagem do Coração"
+        width="350"
+      />
+      <p>
+        Desculpa pela falta de criatividade e essa surpresa horrorosa, mas te amo muito e quero ficar contigo para sempre... Minha princesinha, que possamos voltar como era antes.
+      </p>
+    </div>
+
+    <!-- Linha divisória e pergunta no WhatsApp -->
+    <hr class="divider" />
+
+    <div id="whatsappSection" class="whatsappSection" style="display: none">
+      <p><strong>Clica no ícone do whatsapp para continuar a surpresa hehehehe. Marca no zap com check verde a opção</strong></p>
+      <a href="https://wa.me/5511913303930?text=Casa%20comigo%3F%0A%0ASim%0A%0ANão%0A%0AGostou%20da%20surpresa%20amr%3F" target="_blank">
+        <img
+          width="50"
+          height="50"
+          src="https://img.icons8.com/ios/50/ffffff/whatsapp--v1.png"
+          alt="Ícone WhatsApp"
+        />
+      </a>
+    </div>
+
+    <script>
+      // Função para carregar a API do YouTube e monitorar o estado do player
+      function onYouTubeIframeAPIReady() {
+        window.player = new YT.Player("musicIframe", {
+          events: {
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+
+      // Função chamada quando o estado do player muda
+      function onPlayerStateChange(event) {
+        // Verifica se a música terminou
+        if (event.data === YT.PlayerState.ENDED) {
+          // Mostra o conteúdo adicional após a música
+          document.getElementById("divider").style.display = "block";
+          document.getElementById("typedText").style.display = "block";
+
+          // Começa a digitação do texto
+          const typedText = document.querySelector(".typing");
+          const text =
+            "Olha, ela ficou até o final hehehehe. Que música linda, né? Toda vez que eu escuto ela, fico pensando em nós. Como sempre digo, você é a pessoa que mais amo, te quero para minha vida toda. A gente vai formar uma linda família. Você é minha maior inspiraçâo, tenho muito orgulho de quem vc é. Tenho uma imensa sorte de vc me escolher, mesmo eu sendo feio e chato. Princesa, te amo muitoo";
+          let i = 0;
+
+          // Função para simular a digitação do texto
+          function type() {
+            if (i < text.length) {
+              typedText.innerHTML += text.charAt(i);
+              i++;
+              setTimeout(type, 100);
+            } else {
+              // Após a digitação terminar, mostra a imagem e a mensagem
+              document.getElementById("finalMessage").style.display = "block";
+              document.getElementById("whatsappSection").style.display = "block";
+            }
+          }
+          type();
+        }
+      }
+
+      // Função para bloquear o acesso ao conteúdo até responder as perguntas
+      document
+        .getElementById("questionForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Impede o envio do formulário
+
+          // Exibe o relógio e oculta o ícone de relacionamento
+          document.getElementById("counter").style.display = "block";
+          document.getElementById("relationshipIcon").style.display = "none";
+
+          // Exibe a música após o envio do formulário
+          document.getElementById("musicPlayer").style.display = "flex"; // Mudamos para 'flex' para o layout lado a lado
+
+          // Exibe a mensagem de espera ao lado da música
+          document.getElementById("waitingMessage").style.display = "block";
+
+          // Oculta a mensagem de espera após 10 segundos
+          setTimeout(function () {
+            document.getElementById("waitingMessage").style.display = "none";
+          }, 10000); // 10 segundos
+
+          // Inicia o vídeo manualmente
+          startVideo();
+
+          // Começa o contador
+          startCounter();
+        });
+
+      // Função para iniciar o vídeo manualmente via API do YouTube
+      function startVideo() {
+        window.player.playVideo(); // Inicia o vídeo
+      }
+
+      // Função para iniciar o contador de tempo (relacionamento)
+      const startDate = new Date("2024-08-19T00:00:00");
+
+      // Função para ativar o contador de tempo (anos, meses, dias, horas, minutos, segundos)
+      function startCounter() {
+        const counterElement = document.getElementById("counterTime");
+
+        setInterval(function () {
+          const now = new Date(); // Data atual
+          const diff = now - startDate; // Diferença entre as datas (milissegundos)
+
+          // Cálculo de anos, meses, dias, horas, minutos e segundos
+          const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); // Anos
+          const months = Math.floor(
+            (diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30)
+          ); // Meses
+          const days = Math.floor(
+            (diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
+          ); // Dias
+          const hours = Math.floor(
+            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          ); // Horas
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)); // Minutos
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000); // Segundos
+
+          // Exibe o tempo formatado
+          counterElement.innerHTML = `${years} anos, ${months} meses, ${days} dias, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+        }, 1000); // Atualiza a cada 1 segundo
+      }
+
+      // Carregar a API do YouTube quando o script estiver pronto
+      var tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
+  </body>
+</html>
